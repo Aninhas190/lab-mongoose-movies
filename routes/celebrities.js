@@ -6,12 +6,7 @@ const Celebrity = require('./../models/celebrity');
 celebrityRouter.get('/', (req, res, next) => {
   Celebrity.find()
     .then((document) => {
-      if (!document) {
-        const error = new Error();
-        return Promise.reject(error);
-      } else {
-        res.render('celebrities/index', { document });
-      }
+      res.render('celebrities/index', { document });
     })
     .catch((error) => {
       next(error);
@@ -51,10 +46,7 @@ celebrityRouter.get('/:id/edit', (req, res, next) => {
 celebrityRouter.post('/:id', (req, res, nex) => {
   const id = req.params.id;
   const { name, occupation, catchPhrase } = req.body;
-  Celebrity.update({ _id: id }, { $set: {
-    name,
-    occupation,
-    catchPhrase }})
+  Celebrity.update({ _id: id }, { $set: { name, occupation, catchPhrase }})
     .then(document => res.redirect('/celebrities'))   
     .catch(error => next(error));
 })
