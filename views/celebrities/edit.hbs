@@ -1,0 +1,16 @@
+<h2>Edit</h2>
+{{#with document}}
+  <form action="/celebrities/{{_id}}" method="POST">
+    <label for="name-input">name</label>
+    <input id="name-input" type="text" name="name" placeholder="{{name}}"/>
+    <br/>
+    <label for="occupation-input">Occupation</label>
+    <input id="occupation-input" type="text" name="occupation" placeholder="{{occupation}}"/>
+    <br/>
+    <label for="catch-phrase-input">Catch Phrase</label>
+    <input id="catch-phrase-input" type="text" name="catchPhrase" placeholder="{{catchPhrase}}"/>
+    <br/>
+    <button>Edit</button>
+  </form>
+{{/with}}
+

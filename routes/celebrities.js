@@ -41,6 +41,24 @@ celebrityRouter.post('/:id/delete', (req, res, next) => {
     })
 })
 
+celebrityRouter.get('/:id/edit', (req, res, next) => {
+  const id = req.params.id;
+  Celebrity.findById({ _id: id })
+    .then((document) => res.render('celebrities/edit', {document}))
+    .catch(error => next(error));
+});
+
+celebrityRouter.post('/:id', (req, res, nex) => {
+  const id = req.params.id;
+  const { name, occupation, catchPhrase } = req.body;
+  Celebrity.update({ _id: id }, { $set: {
+    name,
+    occupation,
+    catchPhrase }})
+    .then(document => res.redirect('/celebrities'))   
+    .catch(error => next(error));
+})
+
 celebrityRouter.get('/:id', (req, res, next) => {
   const id = req.params.id;
   Celebrity.findOne({ _id: id })
