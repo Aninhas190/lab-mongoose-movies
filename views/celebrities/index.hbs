@@ -1,6 +1,9 @@
 {{#each document}}
   <h2> {{ name }}</h2>
   <a href="/celebrities/{{_id}}">See more</a>
+  <form action="/celebrities/{{_id}}/delete" method="POST">
+    <button>Delete</button>
+  </form>
 {{/each}}
 <br />
 <a href="/celebrities/create">Create Celebrity</a>

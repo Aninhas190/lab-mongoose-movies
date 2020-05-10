@@ -28,9 +28,18 @@ celebrityRouter.post('/create', (req, res, next) => {
   const newCelebrity = new Celebrity({ name, occupation, catchPhrase });
   newCelebrity
     .save()
-    .then((celebrity) => res.redirect('/'))
-    .catch((error) => res.render('celebrities/create'));
+    .then((celebrity) => res.redirect('/celebrities'))
+    .catch(error => res.render('celebrities/create'));
 });
+
+celebrityRouter.post('/:id/delete', (req, res, next) => {
+  const id = req.params.id;
+  Celebrity.findByIdAndRemove({ _id: id })
+    .then(document => res.redirect('/celebrities'))
+    .catch(error => {
+      next(error);
+    })
+})
 
 celebrityRouter.get('/:id', (req, res, next) => {
   const id = req.params.id;
@@ -38,7 +47,7 @@ celebrityRouter.get('/:id', (req, res, next) => {
     .then((celebrityId) => {
       res.render('celebrities/show', { celebrityId });
     })
-    .catch((error) => {
+    .catch(error => {
       next(error);
     });
 });
